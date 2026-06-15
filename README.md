@@ -9,6 +9,8 @@ Samara Carvalho RM: 573666
 
 Gabriela Batista RM: 573583
 
+**Link do vídeo de demonstração:** https://youtu.be/Aa55Z625d68
+
 ### Explicação técnica 
 O nosso programa foi desenvolvido na linguagem Python, onde ele recebe a bateria inicial e a desejada do Veiculo Elétrico. Caso 
 o usuário digite um nível de bateria desejada menor que a atual, o sistema solicita os valores novamente. Após o Menu inicial, o 
