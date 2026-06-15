@@ -1,32 +1,46 @@
-# SIMULAÇÃO SISTEMA DE CARREGAMENTO INTELIGENTE FOTOVOLTAICO - GOODWE
-from fontTools.misc.cython import returns
+print("-" * 60)
+print("SIMULAÇÃO SISTEMA DE CARREGAMENTO INTELIGENTE FOTOVOLTAICO - GOODWE")
+print("-" * 60)
 
 
+bat_atual = float(input("Digite a Bateria atual (%): "))
+bat_desejada = float(input("Digite a Bateria desejada (%): "))
+if bat_atual > bat_desejada:
+    bat_atual = float(input("Valor inválido! Digite a Bateria atual (%): "))
+    bat_desejada = float(input("Digite a Bateria desejada (%): "))
 
-print("-"*60)
-print ("SIMULAÇÃO SISTEMA DE CARREGAMENTO INTELIGENTE FOTOVOLTAICO - GOODWE")
-print("-"*60)
 
-bat_atual = input("Digite a Bateria atual: ")
-bat_desejada = input("Digite a Bateria desejada: ")
-energia = int
-
-print("_"*60)
-print("MENU")
-print("-"*60)
+print("_" * 60)
+print("MENU DE MONITORAMENTO EM TEMPO REAL")
+print("-" * 60)
 print(f"Estado Inicial do Veículo: {bat_atual}% | Meta Desejada: {bat_desejada}%")
+print("-" * 60)
 
 
-def tarifa (bat_atual, bat_desejada, geracao_solar):
-    diferenca = bat_desejada - bat_atual
-    energia = (diferenca * 0.005) * 60.0
+def simular_tarifa_dinamica(bat_atual, bat_desejada):
+    geracao_solar = [5.2, 3.2, 2.7, 4.1, 1.3]
+
+    energia_total = ((bat_desejada - bat_atual) / 100.0) * 60.0
+
+    print(f"Energia total necessária para a recarga: {energia_total:.2f} kWh\n")
+
+    for ciclo, geracao in enumerate(geracao_solar, start=1):
+
+        if geracao >= 5.0:
+            preco_kwh = 0.50
+            status = "ENSOLARADO"
+        elif geracao >= 2.5:
+            preco_kwh = 0.70
+            status = "PARCIALMENTE ENSOLARADO"
+        else:
+            preco_kwh = 0.90
+            status = "TEMPO FECHADO"
+
+        tarifa_ciclo = energia_total * preco_kwh
+
+        print(f"[Ciclo {ciclo}] ☀️ Sol: {geracao} kW | Status: {status}")
+        print(f"          └─► Preço do kWh: R$ {preco_kwh:.2f} | Custo Estimado: R$ {tarifa_ciclo:.2f}")
+        print("-" * 60)
 
 
-    if geracao_solar >= 5.0:
-        preco_kwh = 0.10  # Super barato! Tem muito sol gerando energia
-    elif geracao_solar >= 2.5:
-        preco_kwh = 0.35  # Desconto intermediário (híbrido)
-    else:
-        preco_kwh = 0.70  # Sem sol, usa a tarifa cheia da rede
-
-tarifa = (energia * preco_kwh)
+simular_tarifa_dinamica(bat_atual, bat_desejada)
