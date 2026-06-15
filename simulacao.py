@@ -38,7 +38,7 @@ def simular_tarifa_dinamica(bat_atual, bat_desejada):
 
         tarifa_ciclo = energia_total * preco_kwh
 
-        print(f"[Ciclo {ciclo}] ☀️ Sol: {geracao} kW | Status: {status}")
+        print(f"[Ciclo {ciclo}] Sol: {geracao} kW | Status: {status}")
         print(f"          └─► Preço do kWh: R$ {preco_kwh:.2f} | Custo Estimado: R$ {tarifa_ciclo:.2f}")
         print("-" * 60)
 
